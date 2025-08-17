@@ -1,0 +1,897 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="description" content="InfinityHuman: Towards Long-Term Audio-Driven Human Animation">
+  <meta name="keywords" content="Audio-Driven Animation, Long-Term Human Animation, Pose-Guided Refinement">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>InfinityHuman: Long-Term Audio-Driven Human Animation</title>
+  
+  <!-- 外部资源 -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-PYVRSFMDRL"></script>
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  
+  <!-- 脚本资源 -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  
+  <!-- 核心样式 -->
+  <style>
+    /* 基础深色主题变量 */
+    :root {
+      --primary-bg: #0a0a0a;
+      --secondary-bg: #1a1a1a;
+      --accent-color: #ffffff;
+      --highlight-color: rgba(255, 255, 255, 0.8);
+      --accent-blue: #3291FF;
+      --card-hover: #2d2d2d;
+      --transition-speed: 0.3s;
+    }
+    
+    body {
+      background-color: var(--primary-bg);
+      color: var(--accent-color);
+      font-family: 'Noto Sans', sans-serif;
+      line-height: 1.6;
+      scroll-behavior: smooth;
+    }
+    
+    .title, .subtitle, .content, .publication-title {
+      color: var(--accent-color) !important;
+    }
+    
+    .section {
+      background-color: var(--primary-bg);
+      padding: 5rem 1.5rem;
+      position: relative;
+    }
+    
+    .footer {
+      background-color: var(--secondary-bg);
+      color: var(--accent-color);
+      padding: 3rem 1.5rem;
+    }
+    
+    .content h1, .content h2, .content h3 {
+      color: var(--accent-color);
+      margin-bottom: 1.5rem;
+    }
+    
+    /* 头部样式 */
+    .hero-transparent {
+      position: relative;
+      z-index: 2;
+      background-color: transparent !important;
+      padding: 8rem 0 4rem 0;
+      text-align: center;
+    }
+    
+    .publication-title {
+      font-size: 2.5rem;
+      text-shadow: 0px 0px 15px var(--highlight-color);
+      margin-bottom: 1rem;
+      line-height: 1.3;
+      font-weight: 700;
+    }
+    
+    .publication-subtitle {
+      font-size: 1.2rem;
+      opacity: 0.9;
+      margin-bottom: 2rem;
+      max-width: 800px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    
+    .publication-authors {
+      margin: 1.5rem 0;
+      line-height: 1.8;
+      max-width: 900px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    
+    .author-block {
+      display: inline-block;
+      margin: 0 0.5rem 0.5rem 0;
+    }
+    
+    .author-block a {
+      color: #b3d1ff;
+      text-decoration: none;
+      transition: color var(--transition-speed) ease;
+    }
+    
+    .author-block a:hover {
+      color: #66b3ff;
+      text-decoration: underline;
+    }
+    
+    /* 链接按钮样式 */
+    .publication-links {
+      margin: 2rem 0;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      justify-content: center;
+    }
+    
+    .external-link {
+      background-color: var(--secondary-bg);
+      color: var(--accent-color);
+      border: none;
+      transition: all var(--transition-speed) ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.75rem 1.5rem;
+    }
+    
+    .external-link:hover {
+      background-color: var(--card-hover);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+      color: var(--accent-color);
+    }
+    
+    /* 视频展示区样式 */
+    .video-section {
+      margin-bottom: 8rem;
+      scroll-margin-top: 3rem;
+    }
+    
+    .section-description {
+      max-width: 800px;
+      margin: 0 auto 3rem auto;
+      text-align: center;
+      font-size: 1.1rem;
+      opacity: 0.9;
+      line-height: 1.7;
+    }
+    
+    .results-carousel {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 1.5rem;
+      margin-top: 2rem;
+    }
+    
+    .video-card {
+      position: relative;
+      transition: all var(--transition-speed) ease;
+      overflow: hidden;
+      border-radius: 8px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    }
+    
+    .video-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
+    }
+    
+    video {
+      width: 100%;
+      height: auto;
+      display: block;
+      border-radius: 8px;
+    }
+    
+    .video-caption {
+      text-align: center;
+      margin: 0.8rem 0;
+      font-size: 0.95rem;
+      opacity: 0.9;
+      padding: 0 0.5rem;
+    }
+    
+    /* 提示框样式 */
+    .prompt {
+      max-width: calc(100% - 20px);
+      position: absolute;
+      background: rgba(0, 0, 0, 0.7);
+      color: rgba(255, 255, 255, 0.9);
+      font-size: 0.85rem;
+      backdrop-filter: blur(10px);
+      bottom: 10px;
+      left: 10px;
+      padding: 8px 12px;
+      border-radius: 6px;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity var(--transition-speed) ease;
+      z-index: 10;
+      line-height: 1.4;
+    }
+    
+    .video-card:hover .prompt {
+      opacity: 1;
+      pointer-events: all;
+    }
+    
+    /* 架构图样式 */
+    .architecture-section {
+      margin: 8rem 0;
+      text-align: center;
+      scroll-margin-top: 3rem;
+    }
+    
+    .architecture-image {
+      max-width: 100%;
+      border-radius: 12px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+      margin: 2rem auto;
+      display: block;
+      transition: transform 0.5s ease;
+    }
+    
+    .architecture-image:hover {
+      transform: scale(1.02);
+    }
+    
+    /* BibTeX 样式 */
+    #BibTeX {
+      background-color: var(--secondary-bg);
+      border-radius: 12px;
+      padding: 3rem;
+      margin: 5rem auto;
+      max-width: 900px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+    }
+    
+    pre {
+      background-color: #2a2a2a;
+      color: #e0e0e0;
+      padding: 1.5rem;
+      border-radius: 8px;
+      overflow-x: auto;
+      font-size: 0.9rem;
+      position: relative;
+    }
+    
+    /* 复制按钮样式 */
+    .copy-btn {
+      position: absolute;
+      top: 0.75rem;
+      right: 0.75rem;
+      background: rgba(255, 255, 255, 0.1);
+      border: none;
+      color: var(--accent-color);
+      padding: 0.25rem 0.75rem;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 0.8rem;
+      transition: background var(--transition-speed) ease;
+    }
+    
+    .copy-btn:hover {
+      background: rgba(255, 255, 255, 0.2);
+    }
+    
+    /* 响应式设计 */
+    @media (max-width: 1024px) {
+      .publication-title {
+        font-size: 2rem;
+      }
+      
+      .video-card {
+        width: 45% !important;
+      }
+    }
+    
+    @media (max-width: 768px) {
+      .section {
+        padding: 3rem 1rem;
+      }
+      
+      .hero-transparent {
+        padding: 6rem 0 2rem 0;
+      }
+      
+      .publication-title {
+        font-size: 1.8rem;
+        padding: 0 1rem;
+      }
+      
+      .video-card {
+        width: 100% !important;
+      }
+      
+      #BibTeX {
+        padding: 2rem 1rem;
+      }
+      
+      .publication-authors {
+        padding: 0 1rem;
+        text-align: left;
+      }
+      
+      .author-block {
+        display: block;
+        margin: 0 0 0.3rem 0;
+      }
+    }
+    
+    /* 视频网格布局 */
+    .video-1-4 { width: 23%; }
+    .video-1-3 { width: 31%; }
+    .video-1-2 { width: 48%; }
+    
+    /* 页脚样式 */
+    footer {
+      text-align: center;
+      padding: 3rem 1rem;
+      background-color: var(--secondary-bg);
+      margin-top: 5rem;
+    }
+    
+    footer a {
+      color: #b3d1ff;
+      text-decoration: none;
+    }
+    
+    footer a:hover {
+      text-decoration: underline;
+    }
+    
+    /* 贡献标签样式 */
+    .equal-contrib {
+      font-size: 0.8rem;
+      background-color: rgba(50, 145, 255, 0.2);
+      color: var(--accent-blue);
+      padding: 0.1rem 0.4rem;
+      border-radius: 4px;
+      margin-left: 0.3rem;
+    }
+    
+    .corresponding {
+      font-size: 0.8rem;
+      background-color: rgba(255, 102, 102, 0.2);
+      color: #ff6666;
+      padding: 0.1rem 0.4rem;
+      border-radius: 4px;
+      margin-left: 0.3rem;
+    }
+    
+    /* 视频容器统一样式 */
+    .video-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 1.5rem;
+      margin-top: 2rem;
+    }
+    
+    .category-title {
+      text-align: center;
+      margin-bottom: 1.5rem;
+    }
+    
+    .video-info {
+      padding: 0 0.5rem;
+    }
+    
+    .video-title {
+      text-align: center;
+      margin: 0.5rem 0 0.2rem 0;
+      font-size: 0.9rem;
+      opacity: 0.9;
+    }
+    
+    .video-type {
+      display: inline-block;
+      background: rgba(50, 145, 255, 0.2);
+      color: var(--accent-blue);
+      font-size: 0.75rem;
+      padding: 0.1rem 0.5rem;
+      border-radius: 4px;
+      margin: 0 auto;
+      display: table;
+    }
+    
+    /* 加载动画 */
+    .video-loading {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 40px;
+      height: 40px;
+      border: 4px solid rgba(255, 255, 255, 0.1);
+      border-left-color: var(--accent-blue);
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+      z-index: 5;
+    }
+    
+    @keyframes spin {
+      to { transform: translate(-50%, -50%) rotate(360deg); }
+    }
+    
+    /* 滚动动画 */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  </style>
+</head>
+
+<body>
+  <!-- 头部区域 -->
+  <section class="hero-transparent">
+    <div class="container has-text-centered">
+      <h1 class="title is-1 publication-title">InfinityHuman</h1>
+      <h2 class="subtitle has-text-centered publication-subtitle">
+        Towards Long-Term Audio-Driven Human Animation
+      </h2>
+      
+      <div class="is-size-5 publication-authors">
+        <span class="author-block">
+          Xiaodi Li<sup>1,*</sup>
+        </span>
+        <span class="author-block">
+          Pan Xie<sup>1,*</sup>
+        </span>
+        <span class="author-block">
+          Yi Ren<sup>2,*</sup>
+        </span>
+        <span class="author-block">
+          Qijun Gan<sup>1,2,*</sup>
+        </span>
+        <br>
+        <span class="author-block">
+          Chen Zhang<sup>2</sup>
+        </span>
+        <span class="author-block">
+          Fangyuan Kong<sup>1</sup>
+        </span>
+        <span class="author-block">
+          Xiang Yin<sup>1,†</sup>
+        </span>
+        <span class="author-block">
+          Bingyue Peng<sup>1</sup>
+        </span>
+        <span class="author-block">
+          Zehuan Yuan<sup>1</sup>
+        </span>
+      </div>
+      
+      <div class="is-size-6 publication-authors">
+        <span class="author-block"><sup>1</sup>ByteDance &nbsp;&nbsp;&nbsp;&nbsp;<sup>2</sup>Zhejiang University</span>
+        <br>
+        <span class="author-block"><sup>*</sup>Equal Contribution &nbsp;&nbsp;&nbsp;&nbsp;<sup>†</sup>Corresponding Author</span>
+      </div>
+      
+      <div class="publication-links">
+        <a href="#" class="external-link button is-normal is-rounded is-dark">
+          <span class="icon"><i class="ai ai-arxiv"></i></span>
+          <span>arXiv</span>
+        </a>
+        <a href="#" class="external-link button is-normal is-rounded is-dark">
+          <span class="icon"><i class="fa fa-github"></i></span>
+          <span>Code (Coming Soon)</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 主展示视频 -->
+  <section class="section fade-in">
+    <div class="container is-max-desktop">
+      <div class="has-text-centered" style="margin-bottom: 2rem;">
+        <div class="video-card" style="max-width: 1200px; margin: 0 auto;">
+          <video poster="" autoplay controls loop playsinline style="width: 100%; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.4);">
+            <source src="./assets/all.mp4" type="video/mp4">
+          </video>
+        </div>
+      </div>
+      
+      <div class="columns is-vcentered">
+        <div class="content has-text-justified">
+          <p style="font-size: 1.1rem; line-height: 1.8;">
+            Audio-driven human animation has attracted wide attention thanks to its practical applications. However, critical challenges remain in generating high-resolution, long-duration videos with consistent appearance and natural hand motions. Existing methods extend videos using overlapping motion frames but suffer from error accumulation, leading to identity drift, color shifts, and scene instability.
+          </p>
+          <p style="font-size: 1.1rem; line-height: 1.8; margin-top: 1rem;">
+            In this work, we propose InfinityHuman, a coarse-to-fine framework that first generates audio-synchronized representations, then progressively refines them into high-resolution, long-duration videos using a pose-guided refiner. Since pose sequences are decoupled from appearance and resist temporal degradation, our pose-guided refiner employs stable poses and the initial frame as a visual anchor to reduce drift and improve lip synchronization.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 长期动画展 -->
+  <section class="section video-section fade-in" id="long-term-animation">
+    <div class="container is-max-desktop">
+      <h2 class="title is-3 has-text-centered">Long-Term Animation with Natural Gestures</h2>
+      <p class="section-description">
+        InfinityHuman preserves high-resolution visual consistency over extended durations, while generating lifelike hand and body movements.
+      </p>
+      
+      <div class="results-carousel">
+        <div class="video-card video-1-2">
+          <video poster="" autoplay controls loop playsinline>
+            <source src="./assets/tea_jw_1min.mp4" type="video/mp4">
+          </video>
+          <div class="video-caption">1-minute cinematic continuous sequence with natural hand motions</div>
+          <div class="prompt">Stable identity and lighting across extended duration</div>
+        </div>
+        <div class="video-card video-1-2">
+          <video poster="" autoplay controls loop playsinline>
+            <source src="./assets/tea_lisa_30s.mp4" type="video/mp4">
+          </video>
+          <div class="video-caption">Diverse character styles</div>
+          <div class="prompt">No visible drift in face features or background</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 方法对比展示 -->
+  <section class="section video-section fade-in" id="method-comparisons">
+        <div class="container">
+      <h3 class="title is-4 category-title">Comparative Evaluation</h3>
+      <div class="video-container">
+        <div class="video-card">
+          <video poster="" controls loop playsinline>
+            <source src="./assets/compare_gt.mp4" type="video/mp4">
+          </video>
+          <div class="video-info">
+            <span class="video-type">Ground Truth</span>
+          </div>
+        </div>
+        
+        <div class="video-card">
+          <video poster="" controls loop playsinline>
+            <source src="./assets/compare_hallo3.mp4" type="video/mp4">
+          </video>
+          <div class="video-info">
+            <span class="video-type">Hallo3</span>
+          </div>
+        </div>
+        
+        <div class="video-card">
+          <video poster="" controls loop playsinline>
+            <source src="./assets/compare_multitalk.mp4" type="video/mp4">
+          </video>
+          <div class="video-info">
+            <span class="video-type">MultiTalk</span>
+          </div>
+        </div>
+        
+        <div class="video-card">
+          <video poster="" controls loop playsinline>
+            <source src="./assets/compare_omniavatar.mp4" type="video/mp4">
+          </video>
+          <div class="video-info">
+            <span class="video-type">OmniAvatar</span>
+          </div>
+        </div>
+        
+        <div class="video-card">
+          <video poster="" controls loop playsinline>
+            <source src="./assets/compare_ours.mp4" type="video/mp4">
+          </video>
+          <div class="video-info">
+            <span class="video-type">InfinityHuman (Ours)</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 单人视频展示 -->
+  <section class="section video-section fade-in" id="talking-avatar-advertisement">
+   <div class="container">
+      <h3 class="title is-4 category-title">Talking Avartar Advertisemnet</h3>
+      <div class="video-container">
+        <div class="video-card video-1-4">
+          <video poster="" controls loop playsinline>
+            <source src="./assets/single1_30s.mp4" type="video/mp4">
+          </video>
+          <div class="video-info">
+            <span class="video-type">single-person 30s Clip</span>
+          </div>
+        </div>
+        
+        <div class="video-card video-1-4">
+          <video poster="" controls loop playsinline>
+            <source src="./assets/single2_30s.mp4" type="video/mp4">
+          </video>
+          <div class="video-info">
+            <span class="video-type">single-person 30s Clip</span>
+          </div>
+        </div>
+        
+        <div class="video-card video-1-4">
+          <video poster="" controls loop playsinline>
+            <source src="./assets/single3_30s.mp4" type="video/mp4">
+          </video>
+          <div class="video-info">
+            <span class="video-type">single-person 30s Clip</span>
+          </div>
+        </div>
+        
+        <div class="video-card video-1-4">
+          <video poster="" controls loop playsinline>
+            <source src="./assets/single4_30s.mp4" type="video/mp4">
+          </video>
+          <div class="video-info">
+            <span class="video-type">single-person 30s Clip</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+        
+  <section class="section video-section fade-in" id="talking-avatar-advertisement">
+   <div class="container">
+      <h3 class="title is-4 category-title">Talking Avartar Advertisemnet</h3>
+      <div class="video-container">
+        <div class="video-card video-1-4">
+          <video poster="" controls loop playsinline>
+            <source src="./assets/wsingle1_30s.mp4" type="video/mp4">
+          </video>
+          <div class="video-info">
+            <span class="video-type">single-person 30s Clip</span>
+          </div>
+        </div>
+        
+        <div class="video-card video-1-4">
+          <video poster="" controls loop playsinline>
+            <source src="./assets/wsingle2_30s.mp4" type="video/mp4">
+          </video>
+          <div class="video-info">
+            <span class="video-type">single-person 30s Clip</span>
+          </div>
+        </div>
+        
+        <div class="video-card video-1-4">
+          <video poster="" controls loop playsinline>
+            <source src="./assets/wsingle3_30s.mp4" type="video/mp4">
+          </video>
+          <div class="video-info">
+            <span class="video-type">single-person 30s Clip</span>
+          </div>
+        </div>
+        
+        <div class="video-card video-1-4">
+          <video poster="" controls loop playsinline>
+            <source src="./assets/wsingle4_30s.mp4" type="video/mp4">
+          </video>
+          <div class="video-info">
+            <span class="video-type">single-person 30s Clip</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 人物物体交互展示 -->
+  <section class="section video-section fade-in" id="goods-showcase-videos">
+    <div class="container">
+      <h3 class="title is-4 category-title">Product Interaction Videos</h3>
+      <div class="video-container">
+        <div class="video-card video-1-4">
+          <video poster="" controls loop playsinline>
+            <source src="./assets/goods_0.mp4" type="video/mp4">
+          </video>
+          <div class="video-info">
+            <span class="video-type">Product Interaction</span>
+          </div>
+        </div>
+        
+        <div class="video-card video-1-4">
+          <video poster="" controls loop playsinline>
+            <source src="./assets/goods_1.mp4" type="video/mp4">
+          </video>
+          <div class="video-info">
+            <span class="video-type">Product Interaction</span>
+          </div>
+        </div>
+        
+        <div class="video-card video-1-4">
+          <video poster="" controls loop playsinline>
+            <source src="./assets/goods_2.mp4" type="video/mp4">
+          </video>
+          <div class="video-info">
+            <span class="video-type">Product Interaction</span>
+          </div>
+        </div>
+        
+        <div class="video-card video-1-4">
+          <video poster="" controls loop playsinline>
+            <source src="./assets/goods_3.mp4" type="video/mp4">
+          </video>
+          <div class="video-info">
+            <span class="video-type">Product Interaction</span>
+          </div>
+        </div>
+        
+        <div class="video-card video-1-4">
+          <video poster="" controls loop playsinline>
+            <source src="./assets/goods_4.mp4" type="video/mp4">
+          </video>
+          <div class="video-info">
+            <span class="video-type">Product Interaction</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 情感表达与访谈展示 -->
+  <!-- 情感表达与访谈展示 -->
+<section class="section video-section fade-in" id="expression-interview">
+  <div class="container">
+    <h3 class="title is-4 category-title">Emotion & Interview</h3>
+    <div class="video-container">
+      <div class="video-card video-1-4">
+        <video poster="" autoplay controls loop playsinline>
+          <source src="./assets/more_happy.mp4" type="video/mp4">
+        </video>
+        <div class="video-info">
+          <span class="video-type">Happy Expression</span>
+        </div>
+      </div>
+      <div class="video-card video-1-4">
+        <video poster="" autoplay controls loop playsinline>
+          <source src="./assets/more_sad.mp4" type="video/mp4">
+        </video>
+        <div class="video-info">
+          <span class="video-type">Sad Expression</span>
+        </div>
+      </div>
+      <div class="video-card video-1-4">
+        <video poster="" autoplay controls loop playsinline>
+          <source src="./assets/more_reverse0.mp4" type="video/mp4">
+        </video>
+        <div class="video-info">
+          <span class="video-type">Interview</span>
+        </div>
+      </div>
+      <div class="video-card video-1-4">
+        <video poster="" autoplay controls loop playsinline>
+          <source src="./assets/more_reverse1.mp4" type="video/mp4">
+        </video>
+        <div class="video-info">
+          <span class="video-type">Interview</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+  <!-- 架构概述 -->
+  <section class="section architecture-section fade-in" id="framework-overview">
+    <div class="container is-max-desktop">
+      <h2 class="title is-3 has-text-centered">Framework Overview</h2>
+      <p class="section-description">
+        Our framework follows a coarse-to-fine pipeline, where audio-synchronized pose sequences serve as a stable intermediate representation. A pose-guided refiner, anchored by the initial frame, progressively reconstructs long-term, high-resolution videos while suppressing identity drift.
+      </p>
+      <img src="./assets/pipeline.png" alt="InfinityHuman Framework" class="architecture-image">
+    </div>
+  </section>
+
+  <!-- BibTeX引用 -->
+  <section class="section fade-in" id="BibTeX">
+    <div class="container is-max-desktop content">
+      <h2 class="title is-3 has-text-centered">BibTeX</h2>
+      <pre>
+        <button class="copy-btn" onclick="copyBibTeX()">Copy</button>
+        <code>@misc{li202Xinfinityhuman,
+          title={InfinityHuman: Towards Long-Term Audio-Driven Human Animation}, 
+          author={Xiaodi Li and Pan Xie and Yi Ren and Qijun Gan and Chen Zhang and 
+                  Fangyuan Kong and Xiang Yin and Bingyue Peng and Zehuan Yuan},
+          year={202X},
+          eprint={XXXX.XXXXX},
+          archivePrefix={arXiv},
+          primaryClass={cs.CV}
+        }</code>
+      </pre>
+    </div>
+  </section>
+
+  <!-- 页脚 -->
+  <footer>
+    <div class="container">
+      <p>All videos are generated using <b>InfinityHuman</b>.</p>
+      <p style="margin-top: 1rem; opacity: 0.7;">
+        &copy; VividHuman Team — ByteDance
+      </p>
+    </div>
+  </footer>
+
+  <!-- 交互脚本 -->
+  <script>
+    // 初始化Google Analytics
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-PYVRSFMDRL');
+
+    // 视频加载完成后自动播放
+    document.addEventListener('DOMContentLoaded', function() {
+      const videos = document.querySelectorAll('video');
+      videos.forEach(video => {
+        // 移除静音属性，确保视频有声音
+        video.removeAttribute('muted');
+        
+        // 添加加载动画
+        const loadingIndicator = document.createElement('div');
+        loadingIndicator.className = 'video-loading';
+        video.parentNode.appendChild(loadingIndicator);
+        
+        video.addEventListener('loadedmetadata', function() {
+          // 视频准备就绪后隐藏加载动画并尝试播放
+          loadingIndicator.style.display = 'none';
+          video.play().catch(e => {
+            console.log('Auto-play prevented:', e);
+          });
+        });
+        
+        // 视频播放时暂停其他视频
+        video.addEventListener('play', function() {
+          videos.forEach(otherVideo => {
+            if (otherVideo !== video && !otherVideo.paused) {
+              otherVideo.pause();
+            }
+          });
+        });
+      });
+      
+      // 滚动动画
+      const fadeElements = document.querySelectorAll('.fade-in');
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+          }
+        });
+      }, { threshold: 0.1 });
+      
+      fadeElements.forEach(element => {
+        observer.observe(element);
+      });
+    });
+    
+    // 复制BibTeX功能
+    function copyBibTeX() {
+      const bibtexText = document.querySelector('#BibTeX pre code').textContent.trim();
+      navigator.clipboard.writeText(bibtexText).then(() => {
+        const copyBtn = document.querySelector('.copy-btn');
+        const originalText = copyBtn.textContent;
+        copyBtn.textContent = 'Copied!';
+        setTimeout(() => {
+          copyBtn.textContent = originalText;
+        }, 2000);
+      }).catch(err => {
+        console.error('Failed to copy: ', err);
+      });
+    }
+    
+    // 平滑滚动效果
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const targetId = this.getAttribute('href');
+        const targetElement = document.querySelector(targetId);
+        if (targetElement) {
+          window.scrollTo({
+            top: targetElement.offsetTop - 50,
+            behavior: 'smooth'
+          });
+        }
+      });
+    });
+  </script>
+</body>
+</html>
