@@ -515,16 +515,19 @@
         InfinityHuman preserves high-resolution visual consistency over extended durations, while generating lifelike hand and body movements.
       </p>
       
-      <div class="results-carousel">
-        <div class="video-card video-1-2">
-          <video poster="" autoplay controls loop playsinline>
+      <div class="results-carousel" style="display: flex; flex-wrap: wrap; gap: 1.5rem; justify-content: center;">
+        <!-- 视频卡片 1 -->
+        <div class="video-card" style="flex: 1; min-width: 300px; max-width: 50%;">
+          <video poster="" autoplay controls loop playsinline style="width: 100%; height: auto;">
             <source src="./assets/tea_jw_1min.mp4" type="video/mp4">
           </video>
           <div class="video-caption">1-minute cinematic continuous sequence with natural hand motions</div>
           <div class="prompt">Stable identity and lighting across extended duration</div>
         </div>
-        <div class="video-card video-1-2">
-          <video poster="" autoplay controls loop playsinline>
+        
+        <!-- 视频卡片 2 -->
+        <div class="video-card" style="flex: 1; min-width: 300px; max-width: 50%;">
+          <video poster="" autoplay controls loop playsinline style="width: 100%; height: auto;">
             <source src="./assets/tea_lisa_30s.mp4" type="video/mp4">
           </video>
           <div class="video-caption">Diverse character styles</div>
@@ -536,11 +539,11 @@
 
   <!-- 方法对比展示 -->
   <section class="section video-section fade-in" id="method-comparisons">
-        <div class="container">
+    <div class="container">
       <h3 class="title is-4 category-title">Comparative Evaluation</h3>
-      <div class="video-container">
-        <div class="video-card">
-          <video poster="" controls loop playsinline>
+      <div class="video-container" style="display: flex; flex-wrap: nowrap; overflow-x: auto; padding: 1rem 0; gap: 1rem;">
+        <div class="video-card" style="flex: 0 0 auto; width: 20%; min-width: 180px;">
+          <video poster="" controls loop playsinline style="width: 100%; height: auto;">
             <source src="./assets/compare_gt.mp4" type="video/mp4">
           </video>
           <div class="video-info">
@@ -548,8 +551,8 @@
           </div>
         </div>
         
-        <div class="video-card">
-          <video poster="" controls loop playsinline>
+        <div class="video-card" style="flex: 0 0 auto; width: 20%; min-width: 180px;">
+          <video poster="" controls loop playsinline style="width: 100%; height: auto;">
             <source src="./assets/compare_hallo3.mp4" type="video/mp4">
           </video>
           <div class="video-info">
@@ -557,8 +560,8 @@
           </div>
         </div>
         
-        <div class="video-card">
-          <video poster="" controls loop playsinline>
+        <div class="video-card" style="flex: 0 0 auto; width: 20%; min-width: 180px;">
+          <video poster="" controls loop playsinline style="width: 100%; height: auto;">
             <source src="./assets/compare_multitalk.mp4" type="video/mp4">
           </video>
           <div class="video-info">
@@ -566,8 +569,8 @@
           </div>
         </div>
         
-        <div class="video-card">
-          <video poster="" controls loop playsinline>
+        <div class="video-card" style="flex: 0 0 auto; width: 20%; min-width: 180px;">
+          <video poster="" controls loop playsinline style="width: 100%; height: auto;">
             <source src="./assets/compare_omniavatar.mp4" type="video/mp4">
           </video>
           <div class="video-info">
@@ -575,8 +578,8 @@
           </div>
         </div>
         
-        <div class="video-card">
-          <video poster="" controls loop playsinline>
+        <div class="video-card" style="flex: 0 0 auto; width: 20%; min-width: 180px;">
+          <video poster="" controls loop playsinline style="width: 100%; height: auto;">
             <source src="./assets/compare_ours.mp4" type="video/mp4">
           </video>
           <div class="video-info">
@@ -728,8 +731,7 @@
   </section>
 
   <!-- 情感表达与访谈展示 -->
-  <!-- 情感表达与访谈展示 -->
-<section class="section video-section fade-in" id="expression-interview">
+  <section class="section video-section fade-in" id="expression-interview">
   <div class="container">
     <h3 class="title is-4 category-title">Emotion & Interview</h3>
     <div class="video-container">
