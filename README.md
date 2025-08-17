@@ -1,1 +1,1 @@
-# IInfinityHuman: Towards Long-Term Audio-Driven Human Animation
+# InfinityHuman: Towards Long-Term Audio-Driven Human Animation
