@@ -1,1 +1,1 @@
-# InfinityHuman-InfinityHuman.github.io
+# IInfinityHuman: Towards Long-Term Audio-Driven Human Animation
