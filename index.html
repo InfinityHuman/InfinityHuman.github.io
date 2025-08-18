@@ -515,21 +515,25 @@
         InfinityHuman preserves high-resolution visual consistency over extended durations, while generating lifelike hand and body movements.
       </p>
       
-      <div class="results-carousel" style="display: flex; flex-wrap: wrap; gap: 1.5rem; justify-content: center;">
-        <!-- 视频卡片 1 -->
-        <div class="video-card" style="flex: 1; min-width: 300px; max-width: 50%;">
-          <video poster="" autoplay controls loop playsinline style="width: 100%; height: auto;">
-            <source src="./assets/tea_jw_1min.mp4" type="video/mp4">
-          </video>
+      <div class="results-carousel" style="display: flex; flex-wrap: wrap; gap: 1.5rem; justify-content: center; align-items: center;">
+        <!-- 视频卡片 1 - 横屏 -->
+        <div class="video-card" style="min-width: 300px; max-width: 60%;">
+          <div style="height: 320px; display: flex; align-items: center; justify-content: center; overflow: hidden; border-radius: 8px;">
+            <video poster="" autoplay controls loop playsinline style="height: 100%; width: auto; object-fit: contain;">
+              <source src="./assets/tea_jw_1min.mp4" type="video/mp4">
+            </video>
+          </div>
           <div class="video-caption">1-minute cinematic continuous sequence with natural hand motions</div>
           <div class="prompt">Stable identity and lighting across extended duration</div>
         </div>
         
-        <!-- 视频卡片 2 -->
-        <div class="video-card" style="flex: 1; min-width: 300px; max-width: 50%;">
-          <video poster="" autoplay controls loop playsinline style="width: 100%; height: auto;">
-            <source src="./assets/tea_lisa_30s.mp4" type="video/mp4">
-          </video>
+        <!-- 视频卡片 2 - 竖屏 -->
+        <div class="video-card" style="min-width: 200px; max-width: 30%;">
+          <div style="height: 320px; display: flex; align-items: center; justify-content: center; overflow: hidden; border-radius: 8px;">
+            <video poster="" autoplay controls loop playsinline style="height: 100%; width: auto; object-fit: contain;">
+              <source src="./assets/tea_lisa_30s.mp4" type="video/mp4">
+            </video>
+          </div>
           <div class="video-caption">Diverse character styles</div>
           <div class="prompt">No visible drift in face features or background</div>
         </div>
@@ -543,9 +547,9 @@
       <h3 class="title is-4 category-title">Comparative Evaluation</h3>
       
       <!-- 上排3个视频 -->
-      <div class="video-container" style="display: flex; flex-wrap: wrap; justify-content: center; padding: 1rem 0 0.5rem 0; gap: 1rem;">
-        <div class="video-card" style="flex: 0 0 auto; width: 30%; min-width: 180px; max-width: 200px;">
-          <video poster="" controls loop playsinline style="width: 100%; height: 100%; object-fit: cover; aspect-ratio: 4/3;">
+      <div class="video-container" style="display: flex; flex-wrap: wrap; justify-content: center; gap: 1rem; margin-bottom: 1.5rem;">
+        <div class="video-card" style="flex: 0 0 auto; width: 30%; min-width: 180px; max-width: 250px;">
+          <video poster="" controls loop playsinline style="width: 100%; height: auto;">
             <source src="./assets/compare_gt.mp4" type="video/mp4">
           </video>
           <div class="video-info">
@@ -553,8 +557,8 @@
           </div>
         </div>
         
-        <div class="video-card" style="flex: 0 0 auto; width: 30%; min-width: 180px; max-width: 200px;">
-          <video poster="" controls loop playsinline style="width: 100%; height: 100%; object-fit: cover; aspect-ratio: 4/3;">
+        <div class="video-card" style="flex: 0 0 auto; width: 30%; min-width: 180px; max-width: 250px;">
+          <video poster="" controls loop playsinline style="width: 100%; height: auto;">
             <source src="./assets/compare_hallo3.mp4" type="video/mp4">
           </video>
           <div class="video-info">
@@ -562,8 +566,8 @@
           </div>
         </div>
         
-        <div class="video-card" style="flex: 0 0 auto; width: 30%; min-width: 180px; max-width: 200px;">
-          <video poster="" controls loop playsinline style="width: 100%; height: 100%; object-fit: cover; aspect-ratio: 4/3;">
+        <div class="video-card" style="flex: 0 0 auto; width: 30%; min-width: 180px; max-width: 250px;">
+          <video poster="" controls loop playsinline style="width: 100%; height: auto;">
             <source src="./assets/compare_multitalk.mp4" type="video/mp4">
           </video>
           <div class="video-info">
@@ -572,10 +576,10 @@
         </div>
       </div>
       
-      <!-- 下排2个视频 -->
-      <div class="video-container" style="display: flex; flex-wrap: wrap; justify-content: center; padding: 0.5rem 0 1rem 0; gap: 1rem;">
-        <div class="video-card" style="flex: 0 0 auto; width: 30%; min-width: 180px; max-width: 200px;">
-          <video poster="" controls loop playsinline style="width: 100%; height: 100%; object-fit: cover; aspect-ratio: 4/3;">
+      <!-- 下排2个视频（居中显示） -->
+      <div class="video-container" style="display: flex; flex-wrap: wrap; justify-content: center; gap: 1rem;">
+        <div class="video-card" style="flex: 0 0 auto; width: 30%; min-width: 180px; max-width: 250px; margin: 0 0.5rem;">
+          <video poster="" controls loop playsinline style="width: 100%; height: auto;">
             <source src="./assets/compare_omniavatar.mp4" type="video/mp4">
           </video>
           <div class="video-info">
@@ -583,8 +587,8 @@
           </div>
         </div>
         
-        <div class="video-card" style="flex: 0 0 auto; width: 30%; min-width: 180px; max-width: 200px;">
-          <video poster="" controls loop playsinline style="width: 100%; height: 100%; object-fit: cover; aspect-ratio: 4/3;">
+        <div class="video-card" style="flex: 0 0 auto; width: 30%; min-width: 180px; max-width: 250px; margin: 0 0.5rem;">
+          <video poster="" controls loop playsinline style="width: 100%; height: auto;">
             <source src="./assets/compare_ours.mp4" type="video/mp4">
           </video>
           <div class="video-info">
@@ -638,7 +642,7 @@
       </div>
     </div>
   </section>
-        
+          
   <section class="section video-section fade-in" id="talking-avatar-advertisement">
    <div class="container">
       <h3 class="title is-4 category-title">Talking Avatar Advertisement</h3>
@@ -683,62 +687,61 @@
   </section>
 
   <!-- 人物物体交互展示 -->
-<section class="section video-section fade-in" id="goods-showcase-videos">
-  <div class="container">
-    <h3 class="title is-4 category-title">Product Interaction Videos</h3>
-    
-    <!-- 上排3个视频 -->
-    <div class="video-container" style="display: flex; flex-wrap: wrap; justify-content: center; padding: 1rem 0 0.5rem 0; gap: 1.5rem;">
-      <div class="video-card video-1-4" style="flex: 0 0 auto; width: 30%; min-width: 180px; max-width: 200px;">
-        <video poster="" controls loop playsinline style="width: 100%; height: 100%; object-fit: cover; aspect-ratio: 4/3;">
-          <source src="./assets/goods_0.mp4" type="video/mp4">
-        </video>
-        <div class="video-info">
-          <span class="video-type">Product Interaction</span>
+  <section class="section video-section fade-in" id="goods-showcase-videos">
+    <div class="container">
+      <h3 class="title is-4 category-title">Product Interaction Videos</h3>
+      <!-- 上排3个视频 -->
+      <div class="video-container" style="margin-bottom: 1.5rem;">
+        <div class="video-card video-1-4">
+          <video poster="" controls loop playsinline>
+            <source src="./assets/goods_0.mp4" type="video/mp4">
+          </video>
+          <div class="video-info">
+            <span class="video-type">Product Interaction</span>
+          </div>
+        </div>
+        
+        <div class="video-card video-1-4">
+          <video poster="" controls loop playsinline>
+            <source src="./assets/goods_1.mp4" type="video/mp4">
+          </video>
+          <div class="video-info">
+            <span class="video-type">Product Interaction</span>
+          </div>
+        </div>
+        
+        <div class="video-card video-1-4">
+          <video poster="" controls loop playsinline>
+            <source src="./assets/goods_2.mp4" type="video/mp4">
+          </video>
+          <div class="video-info">
+            <span class="video-type">Product Interaction</span>
+          </div>
         </div>
       </div>
       
-      <div class="video-card video-1-4" style="flex: 0 0 auto; width: 30%; min-width: 180px; max-width: 200px;">
-        <video poster="" controls loop playsinline style="width: 100%; height: 100%; object-fit: cover; aspect-ratio: 4/3;">
-          <source src="./assets/goods_1.mp4" type="video/mp4">
-        </video>
-        <div class="video-info">
-          <span class="video-type">Product Interaction</span>
+      <!-- 下排2个视频（居中显示） -->
+      <div class="video-container" style="justify-content: center;">
+        <div class="video-card video-1-4" style="margin: 0 0.75rem;">
+          <video poster="" controls loop playsinline>
+            <source src="./assets/goods_3.mp4" type="video/mp4">
+          </video>
+          <div class="video-info">
+            <span class="video-type">Product Interaction</span>
+          </div>
         </div>
-      </div>
-      
-      <div class="video-card video-1-4" style="flex: 0 0 auto; width: 30%; min-width: 180px; max-width: 200px;">
-        <video poster="" controls loop playsinline style="width: 100%; height: 100%; object-fit: cover; aspect-ratio: 4/3;">
-          <source src="./assets/goods_2.mp4" type="video/mp4">
-        </video>
-        <div class="video-info">
-          <span class="video-type">Product Interaction</span>
+        
+        <div class="video-card video-1-4" style="margin: 0 0.75rem;">
+          <video poster="" controls loop playsinline>
+            <source src="./assets/goods_4.mp4" type="video/mp4">
+          </video>
+          <div class="video-info">
+            <span class="video-type">Product Interaction</span>
+          </div>
         </div>
       </div>
     </div>
-    
-    <!-- 下排2个视频 -->
-    <div class="video-container" style="display: flex; flex-wrap: wrap; justify-content: center; padding: 0.5rem 0 1rem 0; gap: 1.5rem;">
-      <div class="video-card video-1-4" style="flex: 0 0 auto; width: 30%; min-width: 180px; max-width: 200px;">
-        <video poster="" controls loop playsinline style="width: 100%; height: 100%; object-fit: cover; aspect-ratio: 4/3;">
-          <source src="./assets/goods_3.mp4" type="video/mp4">
-        </video>
-        <div class="video-info">
-          <span class="video-type">Product Interaction</span>
-        </div>
-      </div>
-      
-      <div class="video-card video-1-4" style="flex: 0 0 auto; width: 30%; min-width: 180px; max-width: 200px;">
-        <video poster="" controls loop playsinline style="width: 100%; height: 100%; object-fit: cover; aspect-ratio: 4/3;">
-          <source src="./assets/goods_4.mp4" type="video/mp4">
-        </video>
-        <div class="video-info">
-          <span class="video-type">Product Interaction</span>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
+  </section>
 
   <!-- 情感表达与访谈展示 -->
   <section class="section video-section fade-in" id="expression-interview">
