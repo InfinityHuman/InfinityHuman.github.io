@@ -507,39 +507,44 @@
     </div>
   </section>
 
-  <!-- 长期动画展 -->
-  <section class="section video-section fade-in" id="long-term-animation">
-    <div class="container is-max-desktop">
-      <h2 class="title is-3 has-text-centered">Long-Term Animation with Natural Gestures</h2>
-      <p class="section-description">
-        InfinityHuman preserves high-resolution visual consistency over extended durations, while generating lifelike hand and body movements.
-      </p>
+ <!-- 长期动画展 -->
+<section class="section video-section fade-in" id="long-term-animation">
+  <div class="container is-max-desktop">
+    <h2 class="title is-3 has-text-centered">Long-Term Animation with Natural Gestures</h2>
+    <p class="section-description">
+      InfinityHuman preserves high-resolution visual consistency over extended durations, while generating lifelike hand and body movements.
+    </p>
+    
+    <!-- 插入的图片 -->
+    <div style="text-align: center; margin: 2rem 0;">
+      <img src="./assets/demonstration.png" alt="Long-term animation demonstration" style="max-width: 100%; border-radius: 12px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);">
+    </div>
+    
+    <div class="results-carousel" style="display: flex; flex-wrap: wrap; gap: 1.5rem; justify-content: center; align-items: center;">
+      <!-- 视频卡片 1 - 横屏 -->
+      <div class="video-card" style="min-width: 300px; max-width: 60%;">
+        <div style="height: 320px; display: flex; align-items: center; justify-content: center; overflow: hidden; border-radius: 8px;">
+          <video poster="" autoplay controls loop playsinline style="height: 100%; width: auto; object-fit: contain;">
+            <source src="./assets/tea_jw_1min.mp4" type="video/mp4">
+          </video>
+        </div>
+        <div class="video-caption">1-minute cinematic continuous sequence with natural hand motions</div>
+        <div class="prompt">Stable identity and lighting across extended duration</div>
+      </div>
       
-      <div class="results-carousel" style="display: flex; flex-wrap: wrap; gap: 1.5rem; justify-content: center; align-items: center;">
-        <!-- 视频卡片 1 - 横屏 -->
-        <div class="video-card" style="min-width: 300px; max-width: 60%;">
-          <div style="height: 320px; display: flex; align-items: center; justify-content: center; overflow: hidden; border-radius: 8px;">
-            <video poster="" autoplay controls loop playsinline style="height: 100%; width: auto; object-fit: contain;">
-              <source src="./assets/tea_jw_1min.mp4" type="video/mp4">
-            </video>
-          </div>
-          <div class="video-caption">1-minute cinematic continuous sequence with natural hand motions</div>
-          <div class="prompt">Stable identity and lighting across extended duration</div>
+      <!-- 视频卡片 2 - 竖屏 -->
+      <div class="video-card" style="min-width: 200px; max-width: 30%;">
+        <div style="height: 320px; display: flex; align-items: center; justify-content: center; overflow: hidden; border-radius: 8px;">
+          <video poster="" autoplay controls loop playsinline style="height: 100%; width: auto; object-fit: contain;">
+            <source src="./assets/tea_lisa_30s.mp4" type="video/mp4">
+          </video>
         </div>
-        
-        <!-- 视频卡片 2 - 竖屏 -->
-        <div class="video-card" style="min-width: 200px; max-width: 30%;">
-          <div style="height: 320px; display: flex; align-items: center; justify-content: center; overflow: hidden; border-radius: 8px;">
-            <video poster="" autoplay controls loop playsinline style="height: 100%; width: auto; object-fit: contain;">
-              <source src="./assets/tea_lisa_30s.mp4" type="video/mp4">
-            </video>
-          </div>
-          <div class="video-caption">Diverse character styles</div>
-          <div class="prompt">No visible drift in face features or background</div>
-        </div>
+        <div class="video-caption">Diverse character styles</div>
+        <div class="prompt">No visible drift in face features or background</div>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
   <!-- 方法对比展示 -->
   <section class="section video-section fade-in" id="method-comparisons">
@@ -820,7 +825,7 @@
     <div class="container">
       <p>All videos are generated using <b>InfinityHuman</b>.</p>
       <p style="margin-top: 1rem; opacity: 0.7;">
-        &copy; VividHuman Team — ByteDance
+        &copy; Vivid-Avatar Team — ByteDance
       </p>
     </div>
   </footer>
